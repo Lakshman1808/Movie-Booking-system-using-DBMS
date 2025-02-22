@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Movie Seat Booking</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    
+    <div>
+      <img class="main-logo" src="https://img.freepik.com/premium-vector/movie-ticket-logo-template-design_20029-891.jpg"/>
+    </div>
+     
+    <div class="movie-container">
+      <label style="font-size: 1em;">Pick a movie:</label>
+      <select id="movie">
+        <option value="300">Bahubali 2</option>
+        <option value="275">SALAAR CEASEFIRE</option>
+        <option value="250">KGF 2</option>
+        <option value="225">Hanuman</option>
+        <option value="200">Kantara</option>
+        
+      </select>
+    </div>
+    
+   <div class="theatre-container">
+      <label style="font-size: 1em;">Pick a theatre:</label>
+      <select id="theatre">
+        <option value="300">PVR ORION</option>
+        <option value="275">VICTORY CINEMAS</option>
+        <option value="250">INOX MANTRI</option>
+        <option value="225">ANJAN THEATER</option>
+        <option value="200">NAVRANG THEATER</option>
+                
+
+      </select>
+    </div>
+
+  <div class="showtimes-container">
+      <label style="font-size: 1em;">Pick a showtime:</label>
+      <select id="showtime">
+        <option value="300">2024-01-01 18:00:00</option>
+        <option value="275">2024-01-02 10:30:00</option>
+        <option value="250">2024-01-03 11:45:00</option>
+        <option value="225">2024-01-04 17:30:00</option>
+        <option value="200">2024-01-05 14:45:00</option>
+        
+
+      </select>
+    </div>
+
+    <ul class="showcase">
+      <li>
+        <div id="seat" class="seat"></div>
+        <small class="status" style="font-size: 1em;">N/A</small>
+      </li>
+      <li>
+        <div id="seat" class="seat selected"></div>
+        <small class="status" style="font-size: 1em;">Selected</small>
+      </li>
+      <li>
+        <div id="seat" class="seat occupied"></div>
+        <small class="status" style="font-size: 1em;">Occupied</small>
+      </li>
+    </ul>
+
+    <div class="container">
+      <div class="screen"></div>
+
+      <div class="row">
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+      </div>
+      <div class="row">
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+      </div>
+      <div class="row">
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat occupied"></div>
+      </div>
+      <div class="row">
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+      </div>
+      <div class="row">
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+      </div>
+      <div class="row">
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat occupied"></div>
+        <div id="seat" class="seat"></div>
+      </div>
+    </div>
+
+    <p class="text" style="font-size: 1em;margin:0px 0px 15px 0px">
+      You have selected <span id="count">0</span> seats for a price of Rs<span
+        id="total"
+        >0</span
+      >
+    </p>
+
+    <a href="./i1.html">
+      <button class="btn-home">
+        Home
+      </button>
+    </a>
+    <a href="SUCCESS.html">
+      <button class="btn-success">
+        Book
+      </button>
+    </a>
+    
+
+    <script>
+     
+      var count=0;
+      var seats=document.getElementsByClassName("seat");
+      for(var i=0;i<seats.length;i++){
+        var item=seats[i];
+        
+        item.addEventListener("click",(event)=>{
+          var price= document.getElementById("movie").value;
+
+          if (!event.target.classList.contains('occupied') && !event.target.classList.contains('selected') ){
+          count++;
+          
+          var total=count*price;
+          event.target.classList.add("selected");
+          document.getElementById("count").innerText=count;
+          document.getElementById("total").innerText=total;
+
+          }
+        })
+      }
+    </script>
+
+
+
+  </body>
+</html>
